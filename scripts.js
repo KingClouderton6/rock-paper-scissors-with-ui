@@ -41,29 +41,24 @@ function playRound(playerSelection, computerSelection) {
     
 
     if (playerSelection === "Rock" && computerSelection === "Rock"){
-        roundResult.textContent = "It's a tie.";
+        draw();
     } else if (playerSelection === "Rock" && computerSelection === "Paper"){
         computerWin();
-        roundResult.textContent = "You lose!";
     } else if (playerSelection === "Rock" && computerSelection === "Scissors"){
         playerWin();
-        roundResult.textContent = "You win!";
     } else if (playerSelection === "Paper" && computerSelection === "Rock"){
         playerWin();
-        roundResult.textContent = "You win!";
     } else if (playerSelection === "Paper" && computerSelection === "Scissors"){
         computerWin();
-        roundResult.textContent = "You lose!";
     } else if (playerSelection === "Paper" && computerSelection === "Paper"){
-        roundResult.textContent = "It's a tie.";
+        draw();
     } else if (playerSelection === "Scissors" && computerSelection === "Rock"){
         computerWin();
         roundResult.textContent = "You lose!";
     } else if (playerSelection === "Scissors" && computerSelection === "Scissors"){
-        roundResult.textContent = "It's a tie.";
+        draw();
     } else if (playerSelection === "Scissors" && computerSelection === "Paper"){
         playerWin();
-        roundResult.textContent = "You win!";
     }
 }
 
@@ -87,7 +82,6 @@ function playerWin(){
     roundResult.textContent = `You win!` ;
     scoreUpdate();
     return playerScore;
-
 }
 
 function computerWin(){
@@ -95,6 +89,11 @@ function computerWin(){
     roundResult.textContent = `You lose!` ;
     scoreUpdate();
     return computerScore;
+}
+
+function draw(){
+    roundResult.textContent = `It's a draw!`;
+    scoreUpdate();
 }
 
 const playerAction = document.querySelector(".player-decision");
@@ -114,9 +113,25 @@ function showRoll(){
     const computerRoll = document.createElement('p');
     computerRoll.textContent = `${computerSelection}`;
     computerAction.appendChild(computerRoll);
+    
+    gameOver();
+}
+
+function gameOver(){
+    if (playerScore === 5) {
+        roundResult.textContent = `Victory, you have won!`;
+    } else if(computerScore === 5) {
+        roundResult.textContent = `Defeat, the computer wins!`;
+    }
 }
 
 
 
 
+function restartGame(){
+    playerScore = 0;
+    computerScore = 0;
+
+    roundResult.textContent = "Let the match begin!";
+}
 
