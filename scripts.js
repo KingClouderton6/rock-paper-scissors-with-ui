@@ -120,18 +120,31 @@ function showRoll(){
 function gameOver(){
     if (playerScore === 5) {
         roundResult.textContent = `Victory, you have won!`;
+        removeFunctionality();
     } else if(computerScore === 5) {
         roundResult.textContent = `Defeat, the computer wins!`;
+        removeFunctionality();
     }
 }
 
-
-
-
-function restartGame(){
-    playerScore = 0;
-    computerScore = 0;
-
-    roundResult.textContent = "Let the match begin!";
+function removeFunctionality(){
+    document.getElementById("Rock").disabled = true;
+    document.getElementById("Paper").disabled = true;
+     document.getElementById("Scissors").disabled = true;
 }
 
+const restartButton = document.querySelector('#restart-game');
+restartButton.addEventListener('click', () => { 
+    document.getElementById("Rock").disabled = false;
+    document.getElementById("Paper").disabled = false;
+     document.getElementById("Scissors").disabled = false;
+    roundResult.textContent = "Let the match begin!";
+    resetScore();
+});
+
+function resetScore(){
+    playerScore = 0; 
+    computerScore = 0;
+    playerPoints.textContent = `${playerScore}  -  ${computerScore}`;
+    return;
+}
