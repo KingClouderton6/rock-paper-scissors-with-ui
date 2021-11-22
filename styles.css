@@ -9,6 +9,7 @@ body {
     background-color:  #3d2b82 ;
     justify-content: center;
     align-content: center;
+    
 }
 
 .score-container {
@@ -20,7 +21,7 @@ body {
 .ui-container {
     background-color: #62bf99;
     margin: 36px;
-    gap: 8px;
+    gap: 20px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -36,9 +37,15 @@ body {
     display: flex;
     flex-direction: row;
     flex: 1;
-    column-gap: 10px;
+    column-gap: 30px;
     padding: 10px;
+    border: solid 7.5px black;
+    border-radius: 5px;
+    background-color: 
+    #303030
+    ;
 }
+
 
 .button-container {
     display: flex;
@@ -47,6 +54,33 @@ body {
     align-items: center;
     flex: 1;
     padding: 10px;
+    color: white;
+}
+
+.button-container:hover {
+    transform: scale(1.25);
+}
+
+.decision-wrapper {
+    display: flex;
+    justify-content: center;
+    column-gap: 10vh;
+    padding: 30px;
+    margin-bottom: 50px;
+    border: solid black 5px;
+    background-color: #303030;
+    width: 440px;
+}
+
+.player-decision,
+.computer-decision {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    font-size: 24px;
+    gap: 5px;
+    color: white;
+
 }
 
 p {
@@ -59,13 +93,18 @@ img {
     width: 100px;
     height: 100px;
 }
-
+/* 
 button:hover {
     transform: scale(1.2);
-}
+} */
 
 .title {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 36px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.score {
+    font-size: 32px;
+    font-family: 'Courier New';
 }

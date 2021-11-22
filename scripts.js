@@ -15,67 +15,59 @@ function computerDecision (){
 // Future me should tidy this up
 let playerSelection;
 rockButton.addEventListener('click', () => {
-    playerSelection = "rock";
-    playRound(playerSelection, computerSelection)
+    playerSelection = "Rock";
+    computerDecision();
+    playRound(playerSelection, computerSelection);
     return playerSelection;
 });
 
 paperButton.addEventListener('click', () => {
-    playerSelection = "paper";
-    playRound(playerSelection, computerSelection)
+    playerSelection = "Paper";
+    computerDecision();
+    playRound(playerSelection, computerSelection);
     return playerSelection;
 });
 
 scissorsButton.addEventListener('click', () => {
-    playerSelection = "scissors";
-    playRound(playerSelection, computerSelection)
+    playerSelection = "Scissors";
+    computerDecision();
+    playRound(playerSelection, computerSelection);
     return playerSelection;
 });
 
 
 // Grabs playerSelection from button and runs it against corresponding rps logic
 function playRound(playerSelection, computerSelection) {
-    computerDecision();
+    
 
-   if (playerSelection === "rock") {
-       if (computerSelection === "Rock") {
-        console.log("You draw. Go again!");
-       } else if (computerSelection === "Scissors") {
-        console.log("You lose!");
+    if (playerSelection === "Rock" && computerSelection === "Rock"){
+        roundResult.textContent = "It's a tie.";
+    } else if (playerSelection === "Rock" && computerSelection === "Paper"){
         computerWin();
-       } else {
-           console.log("You win!");
-           playerWin();
-       } 
-   } 
-
-   if (playerSelection === "scissors") {
-        if (computerSelection === "Rock") {
-            console.log("You lose!");
-            computerWin();
-        } else if (computerSelection === "Paper") {
-            console.log("You win!");
-            playerWin();
-        } else {
-            console.log("You draw. Go again!");
-        }
-   }
-
-   if (playerSelection === "paper") {
-        if (computerSelection === "Rock") {
-            console.log("You win!");
-            playerWin();
-        } else if (computerSelection === "Paper") {
-            console.log("You draw. Go again!");
-        } else {
-            console.log("You lose.");
-            computerWin();
-        }
-   }
-
+        roundResult.textContent = "You lose!";
+    } else if (playerSelection === "Rock" && computerSelection === "Scissors"){
+        playerWin();
+        roundResult.textContent = "You win!";
+    } else if (playerSelection === "Paper" && computerSelection === "Rock"){
+        playerWin();
+        roundResult.textContent = "You win!";
+    } else if (playerSelection === "Paper" && computerSelection === "Scissors"){
+        computerWin();
+        roundResult.textContent = "You lose!";
+    } else if (playerSelection === "Paper" && computerSelection === "Paper"){
+        roundResult.textContent = "It's a tie.";
+    } else if (playerSelection === "Scissors" && computerSelection === "Rock"){
+        computerWin();
+        roundResult.textContent = "You lose!";
+    } else if (playerSelection === "Scissors" && computerSelection === "Scissors"){
+        roundResult.textContent = "It's a tie.";
+    } else if (playerSelection === "Scissors" && computerSelection === "Paper"){
+        playerWin();
+        roundResult.textContent = "You win!";
+    }
 }
 
-// Two functions to increase playerScore and computerScore respectively and update it on screen
+
 let playerScore = 0;
 let computerScore = 0;
 
@@ -85,28 +77,46 @@ roundResult.textContent = "Let the match begin!";
 
 
 const playerPoints = document.querySelector(".player-score");
-playerPoints.textContent = playerScore;
+playerPoints.classList.add('score');
+playerPoints.textContent = `${playerScore}     -      ${computerScore}`;
 
-const computerPoints = document.querySelector(".computer-score");
-computerPoints.textContent = computerScore;
 
+// Two functions to increase playerScore and computerScore respectively; also says whether you win or lose in text.
 function playerWin(){
     ++playerScore;
+    roundResult.textContent = `You win!` ;
     scoreUpdate();
-    console.log(`Player points: ${playerScore} Computer points: ${computerScore}`);
     return playerScore;
 
 }
 
 function computerWin(){
     ++computerScore;
+    roundResult.textContent = `You lose!` ;
     scoreUpdate();
-    console.log(`Player points: ${playerScore} Computer points: ${computerScore}`);
     return computerScore;
 }
 
+const playerAction = document.querySelector(".player-decision");
+const computerAction = document.querySelector(".computer-decision");
+
 function scoreUpdate(){
-    playerPoints.textContent = playerScore;
-    computerPoints.textContent = computerScore;
+    showRoll();
+    playerPoints.textContent = `${playerScore}  -  ${computerScore}`;
     return;
 }
+
+function showRoll(){
+    const playerRoll = document.createElement('p');
+    playerRoll.textContent = `${playerSelection}`;
+    playerAction.appendChild(playerRoll);
+
+    const computerRoll = document.createElement('p');
+    computerRoll.textContent = `${computerSelection}`;
+    computerAction.appendChild(computerRoll);
+}
+
+
+
+
+
